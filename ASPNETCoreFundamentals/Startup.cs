@@ -9,14 +9,20 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace ASPNETCoreFundamentals
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostingEnvironment _env;
+        private readonly ILoggerFactory _loggerFactory;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
+            _env = env;
+            _loggerFactory = loggerFactory;
         }
 
         public IConfiguration Configuration { get; }
@@ -24,6 +30,20 @@ namespace ASPNETCoreFundamentals
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var logger = _loggerFactory.CreateLogger<Startup>();
+
+            if (_env.IsDevelopment())
+            {
+                // Development service configuration
+                logger.LogInformation("Development environment");
+            }
+            else
+            {
+                // Non-development service configuration
+                logger.LogInformation($"Environment: {_env.EnvironmentName}");
+            }
+
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
