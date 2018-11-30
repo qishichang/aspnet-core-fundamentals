@@ -41,7 +41,7 @@ namespace ASPNETCoreFundamentals.Middlewares
             if (null != customException)
             {
                 message = customException.Message;
-                message = customException.Descrition;
+                description = customException.Descrition;
                 statusCode = customException.Code;
             }
 
