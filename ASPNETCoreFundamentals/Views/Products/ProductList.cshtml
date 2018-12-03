@@ -1,0 +1,39 @@
+﻿@model ASPNETCoreFundamentals.Models.ProductListViewModel
+
+@{
+    ViewData["Title"] = "Product List";
+    var start = this.Model.Discount.Start.ToString("d");
+    var end = this.Model.Discount.End.ToString("d");
+    var rate = this.Model.Discount.Rate;
+    var off = (1 - rate) * 100;
+}
+
+<h2>Product List</h2>
+
+<div class="alert alert-success">
+    <i class="glyphicon glyphicon-shopping-cart"></i> The @off% off discount will be valid from @start to @end!
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Discount Price</th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var p in Model.Products)
+       {
+           <tr>
+               <td>@p.ID</td>
+               <td>@p.Name</td>
+               <td>@p.Price</td>
+               <td>@(p.Price * rate)</td>
+           </tr>
+       }
+    </tbody>
+
+</table>
+
+
