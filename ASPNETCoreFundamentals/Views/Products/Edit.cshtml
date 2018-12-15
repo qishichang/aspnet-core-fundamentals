@@ -11,3 +11,13 @@
     @Html.ActionLink("Hyperlink 03", "TargetAction", new { name = Model.Name}) <br />
     @Html.ActionLink("Hyperlink 04", "TargetAction", "TargetController", new { id = Model.ID }, new { style = "color:red"}) <br />
 </div>
+
+<div>
+    @using (Html.BeginForm("TargetAction", "TargetController"))
+    {
+        <input type="text" name="id" value="@Model.ID" /> <br />
+        <input type="text" name="name" value="@Model.Name" /> <br />
+        <input type="text" name="price" value="@Model.Price" /> <br />
+        <input type="submit" value="Submit" />
+    }
+</div>
