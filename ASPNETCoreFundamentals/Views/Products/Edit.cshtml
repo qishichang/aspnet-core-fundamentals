@@ -1,0 +1,13 @@
+﻿@model ASPNETCoreFundamentals.Models.Product
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Product</h2>
+
+<div>
+    @Html.ActionLink("Hyperlink 01", "TargetAction") <br />
+    @Html.ActionLink("Hyperlink 02", "TargetAction", new { id = Model.ID}) <br />
+    @Html.ActionLink("Hyperlink 03", "TargetAction", new { name = Model.Name}) <br />
+    @Html.ActionLink("Hyperlink 04", "TargetAction", "TargetController", new { id = Model.ID }, new { style = "color:red"}) <br />
+</div>
