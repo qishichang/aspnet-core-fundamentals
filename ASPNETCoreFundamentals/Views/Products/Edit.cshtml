@@ -5,13 +5,16 @@
 
 <h2>Edit Product</h2>
 
+<h3>ActionLink</h3>
 <div>
     @Html.ActionLink("Hyperlink 01", "TargetAction") <br />
-    @Html.ActionLink("Hyperlink 02", "TargetAction", new { id = Model.ID}) <br />
-    @Html.ActionLink("Hyperlink 03", "TargetAction", new { name = Model.Name}) <br />
-    @Html.ActionLink("Hyperlink 04", "TargetAction", "TargetController", new { id = Model.ID }, new { style = "color:red"}) <br />
+    @Html.ActionLink("Hyperlink 02", "TargetAction", new { id = Model.ID }) <br />
+    @Html.ActionLink("Hyperlink 03", "TargetAction", new { name = Model.Name }) <br />
+    @Html.ActionLink("Hyperlink 04", "TargetAction", "TargetController", new { id = Model.ID }, new { style = "color:red" }) <br />
 </div>
+<hr />
 
+<h3>BeginForm</h3>
 <div>
     @using (Html.BeginForm("TargetAction", "TargetController"))
     {
@@ -21,3 +24,28 @@
         <input type="submit" value="Submit" />
     }
 </div>
+<hr />
+
+<h3>Hidden</h3>
+<div>
+    @using (Html.BeginForm("TargetAction", "TargetController"))
+    {
+        @Html.Hidden("id", Model.ID) <br />
+        @Html.TextBox("name", Model.Name) <br />
+        @Html.TextBox("price", Model.Price) <br />
+        <input type="submit" value="Submit" />
+    }
+</div>
+<hr />
+
+<h3>HiddenFor</h3>
+<div>
+    @using (Html.BeginForm("TargetAction", "TargetController"))
+    {
+        @Html.HiddenFor(p=>p.ID, Model.ID) <br />
+        @Html.TextBoxFor(p=>p.Name, Model.Name)<br />
+        @Html.TextBoxFor(p=>p.Price, Model.Price) <br />
+        <input type="submit" value="Submit" />
+    }
+</div>
+<hr />
