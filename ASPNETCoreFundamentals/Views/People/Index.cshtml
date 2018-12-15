@@ -1,0 +1,16 @@
+﻿@model ASPNETCoreFundamentals.Models.Person
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.TextBoxFor(p => p.ID) <br />
+    @Html.TextBoxFor(p => p.Name) <br />
+    @Html.TextBoxFor(p => p.Age) <br />
+    <hr />
+    @Html.FakeTextboxFor(p => p.ID) <br />
+    @Html.FakeTextboxFor(p => p.Name) <br />
+    @Html.FakeTextboxFor(p => p.Age)  <br />
+</div>
