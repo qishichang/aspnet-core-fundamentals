@@ -71,3 +71,27 @@
     }
 </div>
 <hr />
+
+<h3>Label/LabelFor</h3>
+<div>
+    @using (Html.BeginForm("TargetAction", "TargetController"))
+    {
+        @Html.HiddenFor(p => p.ID, Model.ID) <br />
+        <table>
+            <tr>
+                <td>@Html.LabelFor(p => p.Name)</td>
+                <td>@Html.TextBoxFor(p => p.Name, Model.Name)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(p => p.Price)</td>
+                <td>@Html.TextBoxFor(p => p.Price, Model.Price)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Submit" style="float:right" />
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<hr />
