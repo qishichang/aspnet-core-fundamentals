@@ -18,6 +18,10 @@ namespace ASPNETCoreFundamentals.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
+            ViewData["country"] = "United States";
+            ViewData["state"] = "Washington";
+            ViewData["county"] = "King";
+            ViewData["city"] = "Redmond";
 
             return View();
         }
