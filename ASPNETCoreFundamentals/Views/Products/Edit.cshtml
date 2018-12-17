@@ -42,10 +42,22 @@
 <div>
     @using (Html.BeginForm("TargetAction", "TargetController"))
     {
-        @Html.HiddenFor(p=>p.ID, Model.ID) <br />
-        @Html.TextBoxFor(p=>p.Name, Model.Name)<br />
-        @Html.TextBoxFor(p=>p.Price, Model.Price) <br />
+        @Html.HiddenFor(p => p.ID, Model.ID) <br />
+        @Html.TextBoxFor(p => p.Name, Model.Name)<br />
+        @Html.TextBoxFor(p => p.Price, Model.Price) <br />
         <input type="submit" value="Submit" />
     }
 </div>
 <hr />
+
+<h3>Password/PasswordFor</h3>
+<div>
+    @using (Html.BeginForm("TargetAction", "TargetController"))
+    {
+        @Html.TextBox("user", "Timothy") <br />
+        @Html.Password("password", "123456") <br />
+        <input type="submit" value="Login" />
+    }
+</div>
+<hr />
+

@@ -5,7 +5,14 @@ VisualStudioVersion = 15.0.28307.106
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNETCoreFundamentals", "ASPNETCoreFundamentals\ASPNETCoreFundamentals.csproj", "{DCD6E90D-B7A4-4F87-A59E-2F4DB900AB7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNETCoreFundamentals.Test", "ASPNETCoreFundamentals.Test\ASPNETCoreFundamentals.Test.csproj", "{3A3A05C4-0976-4FB4-AA18-08CB8CE96AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNETCoreFundamentals.Test", "ASPNETCoreFundamentals.Test\ASPNETCoreFundamentals.Test.csproj", "{3A3A05C4-0976-4FB4-AA18-08CB8CE96AF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3709E746-F721-4006-963F-F42086345A9C}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
