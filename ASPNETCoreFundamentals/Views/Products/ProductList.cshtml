@@ -10,12 +10,15 @@
 
 <h2>Product List</h2>
 
+<h3>Single Select</h3>
+
 <div class="alert alert-success">
     <i class="glyphicon glyphicon-shopping-cart"></i> The @off% off discount will be valid from @start to @end!
 </div>
 <table class="table table-striped">
     <thead>
         <tr>
+            <th>Buy</th>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
@@ -26,6 +29,7 @@
        @foreach (var p in Model.Products)
        {
            <tr>
+               <td>@Html.RadioButton("selected", p.ID)</td>
                <td>@p.ID</td>
                <td>@p.Name</td>
                <td>@p.Price</td>
