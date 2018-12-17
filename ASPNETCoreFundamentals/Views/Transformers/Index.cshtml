@@ -16,12 +16,7 @@
     <tbody>
         @foreach (var t in Model)
         {
-            <tr>
-                <td>@t.ID</td>
-                <td>@t.Name</td>
-                <td>@t.Location</td>
-                <td>@t.Color</td>
-            </tr>
+            <partial name="RoleTableRow" model="@t" />
         }
     </tbody>
 </table>
