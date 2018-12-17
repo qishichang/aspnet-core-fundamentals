@@ -10,7 +10,7 @@
 
 <h2>Product List</h2>
 
-<h3>Single Select</h3>
+<h3>Multiple Select</h3>
 
 <div class="alert alert-success">
     <i class="glyphicon glyphicon-shopping-cart"></i> The @off% off discount will be valid from @start to @end!
@@ -29,7 +29,7 @@
        @foreach (var p in Model.Products)
        {
            <tr>
-               <td>@Html.RadioButton("selected", p.ID)</td>
+               <td>@Html.CheckBox("selected", new { value = p.ID })</td>
                <td>@p.ID</td>
                <td>@p.Name</td>
                <td>@p.Price</td>
