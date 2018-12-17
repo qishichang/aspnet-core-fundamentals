@@ -61,3 +61,13 @@
 </div>
 <hr />
 
+<h3>TextArea/TextAreaFor</h3>
+<div>
+    @using (Html.BeginForm("TargetAction", "TargetController"))
+    {
+        @Html.TextArea("description", Model.Description) <br />
+        @Html.TextAreaFor(p => p.Description, Model.Description) <br />
+        <input type="submit" value="Submit" />
+    }
+</div>
+<hr />
