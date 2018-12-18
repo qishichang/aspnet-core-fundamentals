@@ -33,5 +33,39 @@ namespace Microsoft.AspNetCore.Mvc.Rendering
             tagBuilder.Attributes.Add("id", propertyName); // key purpose 2: for client JavaScript and CSS
             return tagBuilder;
         }
+
+        public static IHtmlContent Table(this IHtmlHelper htmlHelper, string[] columnNames, string[,] content)
+        {
+            var tableBuilder = new TagBuilder("table");
+            tableBuilder.AddCssClass("table table-striped");
+            var headerBuilder = new TagBuilder("thead");
+            var headerRowBuilder = new TagBuilder("tr");
+            foreach (var cn in columnNames)
+            {
+                var headerCellBuilder = new TagBuilder("th");
+                headerCellBuilder.InnerHtml.Append(cn);
+                headerRowBuilder.InnerHtml.AppendHtml(headerCellBuilder);
+            }
+            headerBuilder.InnerHtml.AppendHtml(headerRowBuilder);
+            tableBuilder.InnerHtml.AppendHtml(headerBuilder);
+
+            var tbodyBuilder = new TagBuilder("tbody");
+            int colCount = columnNames.Length;
+            int rowCount = content.Length / colCount;
+            for (int r = 0; r < rowCount; r++)
+            {
+                var rowBuilder = new TagBuilder("tr");
+                for (int c = 0; c < colCount; c++)
+                {
+                    var cellBuilder = new TagBuilder("td");
+                    cellBuilder.InnerHtml.Append(content[r, c]);
+                    rowBuilder.InnerHtml.AppendHtml(cellBuilder);
+                }
+                tbodyBuilder.InnerHtml.AppendHtml(rowBuilder);
+            }
+            tableBuilder.InnerHtml.AppendHtml(tbodyBuilder);
+
+            return tableBuilder;
+        }
     }
 }
