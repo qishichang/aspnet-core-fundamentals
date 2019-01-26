@@ -5,13 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ASPNETCoreFundamentals.Models;
+using ASPNETCoreFundamentals.Core;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IMyDependency _myDependency;
+
+        public HomeController(IMyDependency myDependency)
         {
+            _myDependency = myDependency;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            await _myDependency.WriteMessage("HomeController.Index created this message.");
             return View();
         }
 
