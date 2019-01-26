@@ -13,10 +13,27 @@ namespace ASPNETCoreFundamentals.Controllers
     {
         private readonly IMyDependency _myDependency;
 
-        public HomeController(IMyDependency myDependency)
+        public HomeController(
+            IMyDependency myDependency,
+            OperationService operationService,
+            IOperationTransient transientOperation,
+            IOperationScoped scopedOperation,
+            IOperationSingleton singletonOperation,
+            IOperationSingletonInstance instanceOperation)
         {
             _myDependency = myDependency;
+            OperationService = operationService;
+            TransientOperation = transientOperation;
+            ScopedOperation = scopedOperation;
+            SingletonOperation = singletonOperation;
+            InstanceOperation = instanceOperation;
         }
+
+        public OperationService OperationService { get; }
+        public IOperationTransient TransientOperation { get; }
+        public IOperationScoped ScopedOperation { get; }
+        public IOperationSingleton SingletonOperation { get; }
+        public IOperationSingletonInstance InstanceOperation { get; }
 
         public async Task<IActionResult> Index()
         {
@@ -64,5 +81,21 @@ namespace ASPNETCoreFundamentals.Controllers
         public IActionResult Page1() => View();
 
         public IActionResult Page2() => View();
+
+        public IActionResult Services()
+        {
+            var message = "<h4>Controller operations:</h4>";
+            message += $"Transient: {TransientOperation.OperationId}<br/>";
+            message += $"Scoped: {ScopedOperation.OperationId}<br/>";
+            message += $"Singleton: {SingletonOperation.OperationId}<br/>";
+            message += $"Instance: {InstanceOperation.OperationId}<br/><br/>";
+            message += "<h4>OperationService operations:</h4>";
+            message += $"Transient: {OperationService.TransientOperation.OperationId}<br/>";
+            message += $"Scoped: {OperationService.ScopedOperation.OperationId}<br/>";
+            message += $"Singleton: {OperationService.SingletonOperation.OperationId}<br/>";
+            message += $"Instance: {OperationService.InstanceOperation.OperationId}<br/>";
+            ViewBag.Message = message;
+            return View();
+        }
     }
 }
