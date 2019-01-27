@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Middlewares;
+using ASPNETCoreFundamentals.Modules;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +33,7 @@ namespace ASPNETCoreFundamentals
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var logger = _loggerFactory.CreateLogger<Startup>();
 
@@ -56,13 +59,20 @@ namespace ASPNETCoreFundamentals
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<IMyDependency, MyDependency>();
-            services.AddTransient<IOperationTransient, Operation>();
-            services.AddScoped<IOperationScoped, Operation>();
-            services.AddSingleton<IOperationSingleton, Operation>();
-            services.AddSingleton<IOperationSingletonInstance>(new Operation(Guid.Empty));
+            //services.AddScoped<IMyDependency, MyDependency>();
+            //services.AddTransient<IOperationTransient, Operation>();
+            //services.AddScoped<IOperationScoped, Operation>();
+            //services.AddSingleton<IOperationSingleton, Operation>();
+            //services.AddSingleton<IOperationSingletonInstance>(new Operation(Guid.Empty));
 
             services.AddTransient<OperationService, OperationService>();
+
+            // Add Autofac
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<DefaultModule>();
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
