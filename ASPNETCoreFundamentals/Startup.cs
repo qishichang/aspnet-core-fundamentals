@@ -81,7 +81,7 @@ namespace ASPNETCoreFundamentals
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TodoContext todoContext)
         {
             if (env.IsDevelopment())
             {
@@ -92,6 +92,8 @@ namespace ASPNETCoreFundamentals
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            todoContext.Database.EnsureCreated();
 
             app.UseStatusCodePages(async context =>
             {

@@ -26,7 +26,7 @@ namespace ASPNETCoreFundamentals.Data
                         Id = i,
                         IsDone = i % 3 == 0,
                         Name = "Task " + i,
-                        Priority = i % 5 + 1
+                        Priority = i % 5
                     }
                     ));
         }
