@@ -35,3 +35,9 @@
 <div>
     @await Component.InvokeAsync("PriorityList", new { maxPriority = 2, isDone = false})
 </div>
+
+<hr />
+<div>
+    <h2>Tag Helper</h2>
+    <vc:priority-list max-priority="999" is-done="false"></vc:priority-list>
+</div>
