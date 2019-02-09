@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ASPNETCoreFundamentals.Models.ToDoItem>
+
+<h3>Priority Items</h3>
+
+<ul>
+    @foreach (var todo in Model)
+    {
+        <li>@todo.Name</li>
+    }
+</ul>
