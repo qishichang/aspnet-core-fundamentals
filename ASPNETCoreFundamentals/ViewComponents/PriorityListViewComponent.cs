@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ASPNETCoreFundamentals.ViewComponents
 {
-    public class PriorityListViewComponent : ViewComponent
+    public class PriorityList : ViewComponent
     {
         private readonly TodoContext _context;
 
-        public PriorityListViewComponent(TodoContext context)
+        public PriorityList(TodoContext context)
         {
             _context = context;
         }

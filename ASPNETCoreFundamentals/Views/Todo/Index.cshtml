@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ASPNETCoreFundamentals.Models.ToDoItem>
+﻿@using ASPNETCoreFundamentals.ViewComponents
+@model IEnumerable<ASPNETCoreFundamentals.Models.ToDoItem>
 
 <h2>ToDo</h2>
 <table class="table">
@@ -33,7 +34,7 @@
 </table>
 
 <div>
-    @await Component.InvokeAsync("PriorityList", new { maxPriority = 4, isDone = true})
+    @await Component.InvokeAsync(nameof(PriorityList), new { maxPriority = 4, isDone = true})
 </div>
 
 <hr />
