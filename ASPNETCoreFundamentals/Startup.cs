@@ -6,6 +6,7 @@ using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Data;
 using ASPNETCoreFundamentals.Middlewares;
 using ASPNETCoreFundamentals.Modules;
+using ASPNETCoreFundamentals.Options;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -60,6 +61,8 @@ namespace ASPNETCoreFundamentals
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.Configure<MyOptions>(Configuration);
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

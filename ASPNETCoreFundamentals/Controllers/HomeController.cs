@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ASPNETCoreFundamentals.Models;
 using ASPNETCoreFundamentals.Core;
+using ASPNETCoreFundamentals.Options;
+using Microsoft.Extensions.Options;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IMyDependency _myDependency;
+        private readonly MyOptions _options;
 
         public HomeController(
+            IOptionsMonitor<MyOptions> optionAccessor,
             IMyDependency myDependency,
             OperationService operationService,
             IOperationTransient transientOperation,
@@ -21,6 +25,7 @@ namespace ASPNETCoreFundamentals.Controllers
             IOperationSingleton singletonOperation,
             IOperationSingletonInstance instanceOperation)
         {
+            _options = optionAccessor.CurrentValue;
             _myDependency = myDependency;
             OperationService = operationService;
             TransientOperation = transientOperation;
@@ -81,6 +86,12 @@ namespace ASPNETCoreFundamentals.Controllers
         public IActionResult Page1() => View();
 
         public IActionResult Page2() => View();
+
+        public IActionResult Page3()
+        {
+            ViewBag.SampleOptions = $"option1 = {_options.Option1}, option2 = {_options.Option2}";
+            return View();
+        }
 
         public IActionResult Services()
         {
