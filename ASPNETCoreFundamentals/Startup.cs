@@ -63,6 +63,11 @@ namespace ASPNETCoreFundamentals
             });
 
             services.Configure<MyOptions>(Configuration);
+            services.Configure<MyOptionsWithDelegateConfig>(myOptions =>
+            {
+                myOptions.Option1 = "value1_configured_by_delegate";
+                myOptions.Option2 = 500;
+            });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

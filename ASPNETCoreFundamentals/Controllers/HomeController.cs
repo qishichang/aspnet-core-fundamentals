@@ -15,9 +15,11 @@ namespace ASPNETCoreFundamentals.Controllers
     {
         private readonly IMyDependency _myDependency;
         private readonly MyOptions _options;
+        private readonly MyOptionsWithDelegateConfig _optionsWithDelegateConfig;
 
         public HomeController(
             IOptionsMonitor<MyOptions> optionAccessor,
+            IOptionsMonitor<MyOptionsWithDelegateConfig> optionsAccessorWithDelegateConfig,
             IMyDependency myDependency,
             OperationService operationService,
             IOperationTransient transientOperation,
@@ -26,6 +28,7 @@ namespace ASPNETCoreFundamentals.Controllers
             IOperationSingletonInstance instanceOperation)
         {
             _options = optionAccessor.CurrentValue;
+            _optionsWithDelegateConfig = optionsAccessorWithDelegateConfig.CurrentValue;
             _myDependency = myDependency;
             OperationService = operationService;
             TransientOperation = transientOperation;
@@ -90,6 +93,8 @@ namespace ASPNETCoreFundamentals.Controllers
         public IActionResult Page3()
         {
             ViewBag.SampleOptions = $"option1 = {_options.Option1}, option2 = {_options.Option2}";
+            ViewBag.SimpleOptionsWithDelegateConfig = $"delegate_option1 = {_optionsWithDelegateConfig.Option1}, " +
+                $"delegate_option2 = {_optionsWithDelegateConfig.Option2}";
             return View();
         }
 
