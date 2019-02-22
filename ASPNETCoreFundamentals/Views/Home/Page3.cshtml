@@ -1,4 +1,8 @@
-﻿
+﻿@using Microsoft.Extensions.Options
+@using ASPNETCoreFundamentals.Options
+
+@inject IOptionsMonitor<MyOptions> OptionAccessor
+
 <h2>Options</h2>
 
 <hr />
@@ -6,3 +10,7 @@
 <p>@ViewBag.SampleOptions</p>
 <p>@ViewBag.SimpleOptionsWithDelegateConfig</p>
 <p>@ViewBag.SubOptions</p>
+
+<h2>Options injected into the view</h2>
+<p><b>Option1: </b> @OptionAccessor.CurrentValue.Option1</p>
+<p><b>Option2: </b> @OptionAccessor.CurrentValue.Option2</p>
