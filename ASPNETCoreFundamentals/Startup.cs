@@ -68,6 +68,7 @@ namespace ASPNETCoreFundamentals
                 myOptions.Option1 = "value1_configured_by_delegate";
                 myOptions.Option2 = 500;
             });
+            services.Configure<MySubOptions>(Configuration.GetSection("subsection"));
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
