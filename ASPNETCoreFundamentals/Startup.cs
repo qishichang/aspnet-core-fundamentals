@@ -69,6 +69,11 @@ namespace ASPNETCoreFundamentals
                 myOptions.Option2 = 500;
             });
             services.Configure<MySubOptions>(Configuration.GetSection("subsection"));
+            services.Configure<MyOptions>("named_options_1", Configuration);
+            services.Configure<MyOptions>("named_options_2", myOptions =>
+            {
+                myOptions.Option1 = "named_options_2_value_from_action";
+            });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
