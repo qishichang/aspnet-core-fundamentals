@@ -74,6 +74,10 @@ namespace ASPNETCoreFundamentals
             {
                 myOptions.Option1 = "named_options_2_value_from_action";
             });
+            services.ConfigureAll<MyOptions>(myOptions =>
+            {
+                myOptions.Option1 = "ConfigureAll replacement value";
+            });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
