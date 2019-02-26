@@ -63,6 +63,7 @@ namespace ASPNETCoreFundamentals
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+
             services.Configure<MyOptions>(Configuration);
             services.Configure<MyOptionsWithDelegateConfig>(myOptions =>
             {
@@ -75,11 +76,15 @@ namespace ASPNETCoreFundamentals
             {
                 myOptions.Option1 = "named_options_2_value_from_action";
             });
-            services.ConfigureAll<MyOptions>(myOptions =>
-            {
-                myOptions.Option1 = "ConfigureAll replacement value";
-            });
+            
 
+            services.AddOptions<MyOptions>().Configure(o => o.Option1 = "default");
+            services.AddOptions<MyOptions>("named_options_1").Configure(o => o.Option1 = "named");
+
+            //services.ConfigureAll<MyOptions>(myOptions =>
+            //{
+            //    myOptions.Option1 = "ConfigureAll replacement value";
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
