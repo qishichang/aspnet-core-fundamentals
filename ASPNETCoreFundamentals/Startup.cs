@@ -76,10 +76,14 @@ namespace ASPNETCoreFundamentals
             {
                 myOptions.Option1 = "named_options_2_value_from_action";
             });
-            
+
 
             services.AddOptions<MyOptions>().Configure(o => o.Option1 = "default");
-            services.AddOptions<MyOptions>("named_options_1").Configure(o => o.Option1 = "named");
+            services.AddOptions<MyOptions>("named_options_1").Configure<OperationService>((o, s) =>
+                {
+                    o.Option1 = "named_" + s.TransientOperation.OperationId;
+                    
+                });
 
             //services.ConfigureAll<MyOptions>(myOptions =>
             //{
