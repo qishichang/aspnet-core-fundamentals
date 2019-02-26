@@ -85,6 +85,19 @@ namespace ASPNETCoreFundamentals
                     
                 });
 
+            services.PostConfigure<MyOptions>(myOptions =>
+            {
+                myOptions.Option1 = "post_configured_option1_value";
+            });
+            services.PostConfigure<MyOptions>("named_options_1", myOptions =>
+            {
+                myOptions.Option1 = "post_configured_option1_value";
+            });
+            services.PostConfigureAll<MyOptions>(myOptions =>
+            {
+                myOptions.Option1 = "post_configured_all_option1_value";
+            });
+
             //services.ConfigureAll<MyOptions>(myOptions =>
             //{
             //    myOptions.Option1 = "ConfigureAll replacement value";
