@@ -8,6 +8,7 @@ using ASPNETCoreFundamentals.Models;
 using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Options;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
@@ -20,8 +21,10 @@ namespace ASPNETCoreFundamentals.Controllers
         private readonly MyOptions _snapshotOptions;
         private readonly MyOptions _named_options_1;
         private readonly MyOptions _named_options_2;
+        private readonly IConfiguration _config;
 
         public HomeController(
+            IConfiguration config,
             IOptionsMonitor<MyOptions> optionAccessor,
             IOptionsMonitor<MyOptionsWithDelegateConfig> optionsAccessorWithDelegateConfig,
             IOptionsMonitor<MySubOptions> subOptionsAccessor,
@@ -34,6 +37,8 @@ namespace ASPNETCoreFundamentals.Controllers
             IOperationSingleton singletonOperation,
             IOperationSingletonInstance instanceOperation)
         {
+            _config = config;
+
             _options = optionAccessor.CurrentValue;
             _optionsWithDelegateConfig = optionsAccessorWithDelegateConfig.CurrentValue;
             _subOptions = subOptionsAccessor.CurrentValue;
@@ -128,6 +133,14 @@ namespace ASPNETCoreFundamentals.Controllers
             message += $"Singleton: {OperationService.SingletonOperation.OperationId}<br/>";
             message += $"Instance: {OperationService.InstanceOperation.OperationId}<br/>";
             ViewBag.Message = message;
+            return View();
+        }
+
+        public IActionResult Config()
+        {
+            ViewBag.CommandLineConfig = $"CommandLineValue1: {_config.GetValue<string>("CommandLineKey1")}, "
+                   + $"CommandLineValue2: {_config.GetValue<string>("CommandLineKey2")}, "
+                   + $"CommandLineValue3: {_config.GetValue<string>("CommandLineKey3")}";
             return View();
         }
     }

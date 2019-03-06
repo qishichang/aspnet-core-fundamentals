@@ -38,6 +38,10 @@ namespace ASPNETCoreFundamentals
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddCommandLine(args);
+                })
                 .UseStartup<Startup>();
     }
 }
