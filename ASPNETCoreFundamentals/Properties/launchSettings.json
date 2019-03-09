@@ -17,7 +17,7 @@
     },
     "ASPNETCoreFundamentals": {
       "commandName": "Project",
-      "commandLineArgs": "--CommandLineKey1=value1 CommandLineKey2=value2 /CommandLineKey3=value3",
+      "commandLineArgs": "-CLKey1=value1 CommandLineKey2=value2 /CommandLineKey3=value3",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

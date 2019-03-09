@@ -14,6 +14,12 @@ namespace ASPNETCoreFundamentals
 {
     public class Program
     {
+        public static readonly Dictionary<string, string> _switchMappings =
+            new Dictionary<string, string>
+            {
+                { "-CLKey1", "CommandLineKey1" },
+                { "-CLKey2", "CommandLineKey2" }
+            };
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
@@ -37,10 +43,10 @@ namespace ASPNETCoreFundamentals
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddCommandLine(args);
+                    config.AddCommandLine(args, _switchMappings);
                 })
                 .UseStartup<Startup>();
     }
