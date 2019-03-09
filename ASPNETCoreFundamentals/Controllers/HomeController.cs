@@ -141,6 +141,13 @@ namespace ASPNETCoreFundamentals.Controllers
             ViewBag.CommandLineConfig = $"CommandLineValue1: {_config.GetValue<string>("CommandLineKey1")}, "
                    + $"CommandLineValue2: {_config.GetValue<string>("CommandLineKey2")}, "
                    + $"CommandLineValue3: {_config.GetValue<string>("CommandLineKey3")}";
+
+            ViewBag.ConnectionString = $"Connection: {_config.GetConnectionString("MvcMovieContext")}";
+            var providerName = _config.GetValue<string>("ConnectionStrings:MvcMovieContext_ProviderName");
+            if (!string.IsNullOrEmpty(providerName))
+            {
+                ViewBag.ConnectionString += $", Provider: {providerName}";
+            }
             return View();
         }
     }
