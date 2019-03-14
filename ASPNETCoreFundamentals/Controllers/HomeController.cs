@@ -155,7 +155,9 @@ namespace ASPNETCoreFundamentals.Controllers
                             $"section2:subsection0:key = { _config.GetValue<string>("section2:subsection0:key")}, " +
                             $"section2:subsection1:key = { _config.GetValue<string>("section2:subsection1:key")}";
 
-
+            ViewBag.JsonConfig = $"jsonoption1 = {_config.GetValue<string>("jsonoption1")}, " +
+                                 $"jsonoption2:suboption1 = {_config.GetValue<string>("jsonoption2:suboption1")}, " +
+                                 $"jsonoption2:suboption2 = {_config.GetValue<string>("jsonoption2:suboption2")}";
             return View();
         }
     }

@@ -1,0 +1,7 @@
+{
+  "JsonOption1": "JsonValue1",
+  "JsonOption2": {
+    "SubOption1": "JsonOption2-SubOption1-value",
+    "SubOption2": "JsonOption2-SubOption2-value"
+  }
+}
