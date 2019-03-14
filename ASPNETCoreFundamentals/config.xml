@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <section0>
+    <key0>section0 value0</key0>
+    <key1>section0 value1</key1>
+  </section0>
+  <section1>
+    <key0>section1 value0</key0>
+    <key1>section1 value1</key1>
+  </section1>
+  <section name="section0">
+    <key name="key0">value</key>
+    <key name="key1">value</key>
+  </section>
+</configuration>

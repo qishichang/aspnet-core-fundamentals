@@ -158,6 +158,16 @@ namespace ASPNETCoreFundamentals.Controllers
             ViewBag.JsonConfig = $"jsonoption1 = {_config.GetValue<string>("jsonoption1")}, " +
                                  $"jsonoption2:suboption1 = {_config.GetValue<string>("jsonoption2:suboption1")}, " +
                                  $"jsonoption2:suboption2 = {_config.GetValue<string>("jsonoption2:suboption2")}";
+
+            ViewBag.XmlConfig = $"section0:key0 = {_config.GetValue<string>("section0:key0")}, " +
+                                $"section0:key1 = {_config.GetValue<string>("section0:key1")}, " +
+                                $"section1:key0 = {_config.GetValue<string>("section1:key0")}, " +
+                                $"section1:key1 = {_config.GetValue<string>("section1:key1")}, " + 
+                                $"section:section0:name = {_config.GetValue<string>("section:section0:name")}, " +
+                                $"section:section0:key:key0:name = {_config.GetValue<string>("section:section0:key:key0:name")}, " +
+                                $"section:section0:key:key0 = {_config.GetValue<string>("section:section0:key:key0")}, " +
+                                $"section:section0:key:key1:name = {_config.GetValue<string>("section:section0:key:key1:name")}, " +
+                                $"section:section0:key:key1 = {_config.GetValue<string>("section:section0:key:key1")}";
             return View();
         }
     }
