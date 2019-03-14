@@ -148,6 +148,14 @@ namespace ASPNETCoreFundamentals.Controllers
             {
                 ViewBag.ConnectionString += $", Provider: {providerName}";
             }
+
+            ViewBag.INIConfig = $"section0:key0 = {_config.GetValue<string>("section0:key0")}, " +
+                            $"section0:key1 = { _config.GetValue<string>("section0:key1")}, " +
+                            $"section1:subsection:key = { _config.GetValue<string>("section1:subsection:key")}, " +
+                            $"section2:subsection0:key = { _config.GetValue<string>("section2:subsection0:key")}, " +
+                            $"section2:subsection1:key = { _config.GetValue<string>("section2:subsection1:key")}";
+
+
             return View();
         }
     }
