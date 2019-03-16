@@ -185,6 +185,8 @@ namespace ASPNETCoreFundamentals.Controllers
             var arrayExample = _config.GetSection("array").Get<ArrayExample>();
             ViewBag.ArrayConfig = $"Entries: {string.Join(',', arrayExample.Entries)}";
 
+            var jsonArrayExample = _config.GetSection("json_array").Get<JsonArrayExample>();
+            ViewBag.JsonArrayConfig = $"Json Array: Key-{jsonArrayExample.Key}, Subsection: {string.Join(',', jsonArrayExample.Subsection)}";
             return View();
         }
     }

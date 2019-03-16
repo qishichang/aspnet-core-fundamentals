@@ -72,6 +72,7 @@ namespace ASPNETCoreFundamentals
                     config.AddJsonFile("config.json", optional: true, reloadOnChange: true);
                     config.AddJsonFile("starship.json", optional: true, reloadOnChange: true);
                     config.AddJsonFile("missing_value.json", optional: false, reloadOnChange: false);
+                    config.AddJsonFile("json_array.json", optional: true, reloadOnChange: true);
                     config.AddXmlFile("config.xml", optional: true, reloadOnChange: true);
                     config.AddXmlFile("tvshow.xml", optional: true, reloadOnChange: true);
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "path/to/files");
