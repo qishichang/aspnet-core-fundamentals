@@ -175,6 +175,9 @@ namespace ASPNETCoreFundamentals.Controllers
                                      $"MemoryCollectionKey2 = {_config.GetValue<string>("MemoryCollectionKey2")}";
 
 
+            var starship = new Starship();
+            _config.GetSection("starship").Bind(starship);
+            ViewBag.StarshipConfig = $"Starship name: {starship.Name}, registry: {starship.Registry}, class: {starship.Class}, length: {starship.Length}, commisioned: {starship.Commissioned}, trademark: {_config.GetValue<string>("trademark")}";
             return View();
         }
     }
