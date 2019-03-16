@@ -28,6 +28,17 @@ namespace ASPNETCoreFundamentals
                 { "MemoryCollectionKey2", "value2" }
             };
 
+        public static readonly Dictionary<string, string> _arrayDict =
+            new Dictionary<string, string>
+            {
+                { "array:entries:0", "value0" },
+                { "array:entries:1", "value1" },
+                { "array:entries:2", "value2" },
+                //{ "array:entries:3", "value3" },
+                { "array:entries:4", "value4" },
+                { "array:entries:5", "value5" }
+            };
+
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
@@ -56,9 +67,11 @@ namespace ASPNETCoreFundamentals
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory());
                     config.AddInMemoryCollection(_dict);
+                    config.AddInMemoryCollection(_arrayDict);
                     config.AddIniFile("config.ini", optional: true, reloadOnChange: true);
                     config.AddJsonFile("config.json", optional: true, reloadOnChange: true);
                     config.AddJsonFile("starship.json", optional: true, reloadOnChange: true);
+                    config.AddJsonFile("missing_value.json", optional: false, reloadOnChange: false);
                     config.AddXmlFile("config.xml", optional: true, reloadOnChange: true);
                     config.AddXmlFile("tvshow.xml", optional: true, reloadOnChange: true);
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "path/to/files");

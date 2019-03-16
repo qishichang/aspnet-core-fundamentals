@@ -181,6 +181,10 @@ namespace ASPNETCoreFundamentals.Controllers
 
             var tvShow = _config.GetSection("tvshow").Get<TvShow>();
             ViewBag.TvShowConfig = $"TvShow metadata: {tvShow.Metadata.Series}-{tvShow.Metadata.Title}-{tvShow.Metadata.AirDate}-{tvShow.Metadata.Episode}, actors: {tvShow.Actors.Names}, legal: {tvShow.Legal}";
+
+            var arrayExample = _config.GetSection("array").Get<ArrayExample>();
+            ViewBag.ArrayConfig = $"Entries: {string.Join(',', arrayExample.Entries)}";
+
             return View();
         }
     }
