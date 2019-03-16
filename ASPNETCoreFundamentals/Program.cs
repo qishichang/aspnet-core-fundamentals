@@ -50,6 +50,8 @@ namespace ASPNETCoreFundamentals
                     config.AddIniFile("config.ini", optional: true, reloadOnChange: true);
                     config.AddJsonFile("config.json", optional: true, reloadOnChange: true);
                     config.AddXmlFile("config.xml", optional: true, reloadOnChange: true);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "path/to/files");
+                    config.AddKeyPerFile(directoryPath: path, optional: true);
                     config.AddCommandLine(args, _switchMappings);
                 })
                 .UseStartup<Startup>();

@@ -162,12 +162,15 @@ namespace ASPNETCoreFundamentals.Controllers
             ViewBag.XmlConfig = $"section0:key0 = {_config.GetValue<string>("section0:key0")}, " +
                                 $"section0:key1 = {_config.GetValue<string>("section0:key1")}, " +
                                 $"section1:key0 = {_config.GetValue<string>("section1:key0")}, " +
-                                $"section1:key1 = {_config.GetValue<string>("section1:key1")}, " + 
+                                $"section1:key1 = {_config.GetValue<string>("section1:key1")}, " +
                                 $"section:section0:name = {_config.GetValue<string>("section:section0:name")}, " +
                                 $"section:section0:key:key0:name = {_config.GetValue<string>("section:section0:key:key0:name")}, " +
                                 $"section:section0:key:key0 = {_config.GetValue<string>("section:section0:key:key0")}, " +
                                 $"section:section0:key:key1:name = {_config.GetValue<string>("section:section0:key:key1:name")}, " +
                                 $"section:section0:key:key1 = {_config.GetValue<string>("section:section0:key:key1")}";
+
+            ViewBag.KeyPerFileConfig = $"Logging:LogLevel:System = {_config.GetValue<string>("Logging:LogLevel:System")}";
+
             return View();
         }
     }
