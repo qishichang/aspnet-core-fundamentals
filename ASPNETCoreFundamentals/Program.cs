@@ -20,6 +20,14 @@ namespace ASPNETCoreFundamentals
                 { "-CLKey1", "CommandLineKey1" },
                 { "-CLKey2", "CommandLineKey2" }
             };
+
+        public static readonly Dictionary<string, string> _dict =
+            new Dictionary<string, string>
+            {
+                { "MemoryCollectionKey1", "value1" },
+                { "MemoryCollectionKey2", "value2" }
+            };
+
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
@@ -47,6 +55,7 @@ namespace ASPNETCoreFundamentals
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory());
+                    config.AddInMemoryCollection(_dict);
                     config.AddIniFile("config.ini", optional: true, reloadOnChange: true);
                     config.AddJsonFile("config.json", optional: true, reloadOnChange: true);
                     config.AddXmlFile("config.xml", optional: true, reloadOnChange: true);

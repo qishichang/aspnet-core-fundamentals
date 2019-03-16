@@ -171,6 +171,10 @@ namespace ASPNETCoreFundamentals.Controllers
 
             ViewBag.KeyPerFileConfig = $"Logging:LogLevel:System = {_config.GetValue<string>("Logging:LogLevel:System")}";
 
+            ViewBag.InMemoryConfig = $"MemoryCollectionKey1 = {_config.GetValue<string>("MemoryCollectionKey1")}, " +
+                                     $"MemoryCollectionKey2 = {_config.GetValue<string>("MemoryCollectionKey2")}";
+
+
             return View();
         }
     }
