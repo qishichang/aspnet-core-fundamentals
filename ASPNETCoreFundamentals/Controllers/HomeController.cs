@@ -178,6 +178,9 @@ namespace ASPNETCoreFundamentals.Controllers
             var starship = new Starship();
             _config.GetSection("starship").Bind(starship);
             ViewBag.StarshipConfig = $"Starship name: {starship.Name}, registry: {starship.Registry}, class: {starship.Class}, length: {starship.Length}, commisioned: {starship.Commissioned}, trademark: {_config.GetValue<string>("trademark")}";
+
+            var tvShow = _config.GetSection("tvshow").Get<TvShow>();
+            ViewBag.TvShowConfig = $"TvShow metadata: {tvShow.Metadata.Series}-{tvShow.Metadata.Title}-{tvShow.Metadata.AirDate}-{tvShow.Metadata.Episode}, actors: {tvShow.Actors.Names}, legal: {tvShow.Legal}";
             return View();
         }
     }

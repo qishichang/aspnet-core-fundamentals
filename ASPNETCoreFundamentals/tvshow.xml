@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <tvshow>
+    <metadata>
+      <series>Dr. Who</series>
+      <title>The Sun Markers</title>
+      <airdate>11/26/1977</airdate>
+      <episode>4</episode>
+    </metadata>
+    <actors>
+      <names>
+        Tom Baker, Louise Jameson, John Lesson
+      </names>
+    </actors>
+    <legal>(c)1977 BCC https://www.bbc.co.uk/programmes/b006q2x0 </legal>
+  </tvshow>
+</configuration>
