@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
 <h2>Configuration</h2>
 
 <hr />
@@ -34,3 +36,6 @@
 
 <h3>Entity Framework Custom Configuration Provier</h3>
 <p>@ViewBag.EFConfiguration</p>
+
+<h3>Inject Configuration</h3>
+<p>quote1: @Configuration["quote1"]</p>
