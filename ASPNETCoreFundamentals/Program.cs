@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNETCoreFundamentals.Core;
+using ASPNETCoreFundamentals.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -77,6 +79,7 @@ namespace ASPNETCoreFundamentals
                     config.AddXmlFile("tvshow.xml", optional: true, reloadOnChange: true);
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "path/to/files");
                     config.AddKeyPerFile(directoryPath: path, optional: true);
+                    config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
                     config.AddCommandLine(args, _switchMappings);
                 })
                 .UseStartup<Startup>();
