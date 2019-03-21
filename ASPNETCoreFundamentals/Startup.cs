@@ -122,7 +122,7 @@ namespace ASPNETCoreFundamentals
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TodoContext todoContext, IOptionsMonitor<MyOptions> optionsAccessor)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IConfiguration config, TodoContext todoContext, IOptionsMonitor<MyOptions> optionsAccessor)
         {
             var option1 = optionsAccessor.CurrentValue.Option1;
 
@@ -150,6 +150,8 @@ namespace ASPNETCoreFundamentals
             app.UseCookiePolicy();
 
             app.UseMiddleware<CustomExceptionMiddleware>();
+
+            var value = config["quote1"];
 
             app.UseMvc(routes =>
             {
