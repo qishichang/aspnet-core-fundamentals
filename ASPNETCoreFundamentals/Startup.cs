@@ -39,6 +39,16 @@ namespace ASPNETCoreFundamentals
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            return StartupConfigureServices(services);
+        }
+
+        public IServiceProvider ConfigureStagingServices(IServiceCollection services)
+        {
+            return StartupConfigureServices(services);
+        }
+
+        public IServiceProvider StartupConfigureServices(IServiceCollection services)
+        {
             var logger = _loggerFactory.CreateLogger<Startup>();
 
             if (_env.IsDevelopment())
@@ -80,10 +90,10 @@ namespace ASPNETCoreFundamentals
 
             services.AddOptions<MyOptions>().Configure(o => o.Option1 = "default");
             services.AddOptions<MyOptions>("named_options_1").Configure<OperationService>((o, s) =>
-                {
-                    o.Option1 = "named_" + s.TransientOperation.OperationId;
-                    
-                });
+            {
+                o.Option1 = "named_" + s.TransientOperation.OperationId;
+
+            });
 
             services.PostConfigure<MyOptions>(myOptions =>
             {
@@ -159,6 +169,29 @@ namespace ASPNETCoreFundamentals
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public void ConfigureStaging(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (!env.IsStaging())
+            {
+                throw new Exception("Not staging.");
+            }
+
+            app.UseExceptionHandler("/Home/Error");
+            app.UseHsts();
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
         }
     }
 }
