@@ -9,9 +9,11 @@ using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using ASPNETCoreFundamentals.Filters;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
+    [AddHeaderWithFactory]
     public class HomeController : Controller
     {
         private readonly IMyDependency _myDependency;
