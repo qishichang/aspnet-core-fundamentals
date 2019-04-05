@@ -306,6 +306,10 @@ namespace ASPNETCoreFundamentals
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "currency_by_code",
+                    template: "/currency/{code}",
+                    defaults: new { controller = "currencies", action = "view" });
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
