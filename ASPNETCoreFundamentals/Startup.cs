@@ -310,6 +310,9 @@ namespace ASPNETCoreFundamentals
                     template: "/currency/{code}",
                     defaults: new { controller = "currencies", action = "view" });
                 routes.MapRoute(
+                    name: "rate_by_code",
+                    template: "{controller}/{currency=USD}/{action=view}");
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
