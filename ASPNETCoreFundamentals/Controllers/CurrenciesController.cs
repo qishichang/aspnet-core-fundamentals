@@ -17,5 +17,10 @@ namespace ASPNETCoreFundamentals.Controllers
         {
             return code;
         }
+
+        public string Convert(string currency, string others)
+        {
+            return $"{currency} to {others}";
+        }
     }
 }

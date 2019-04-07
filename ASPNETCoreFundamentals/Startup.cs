@@ -311,6 +311,10 @@ namespace ASPNETCoreFundamentals
                     template: "/currency/{code}",
                     defaults: new { controller = "currencies", action = "view" });
                 routes.MapRoute(
+                    name: "convert_currencies",
+                    template: "{currency}/convert/{*others}",
+                    defaults: new { controller = "currencies", action = "convert" });
+                routes.MapRoute(
                     name: "rate_by_code",
                     template: "{controller}/{currency}/{action}",
                     defaults: new { currency = "USD", action = "view" },
