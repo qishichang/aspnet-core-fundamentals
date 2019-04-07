@@ -10,7 +10,9 @@ namespace ASPNETCoreFundamentals.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var url = Url.Action("View", "Currencies", new { code = "USD" });
+            var url2 = Url.RouteUrl("currency_by_code", new { code = "USD" });
+            return Content($"The url is {url}, another url is {url2}");
         }
 
         public string View(string code)
