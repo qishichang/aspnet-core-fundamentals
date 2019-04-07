@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -311,7 +312,9 @@ namespace ASPNETCoreFundamentals
                     defaults: new { controller = "currencies", action = "view" });
                 routes.MapRoute(
                     name: "rate_by_code",
-                    template: "{controller}/{currency:length(3)=USD}/{action=view}");
+                    template: "{controller}/{currency}/{action}",
+                    defaults: new { currency = "USD", action = "view" },
+                    constraints: new { currency = new LengthRouteConstraint(3) });
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
