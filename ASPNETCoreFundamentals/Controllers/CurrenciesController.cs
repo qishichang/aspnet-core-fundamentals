@@ -24,5 +24,20 @@ namespace ASPNETCoreFundamentals.Controllers
         {
             return $"{currency} to {others}";
         }
+
+        public IActionResult RedirectingToAnActionMethod()
+        {
+            return RedirectToAction("View", "Currencies", new { code = "USD" });
+        }
+
+        public IActionResult RedirectingToARoute()
+        {
+            return RedirectToRoute("currency_by_code", new { code = "USD" });
+        }
+
+        public IActionResult RedirectingToAnActionInTheSameController()
+        {
+            return RedirectToAction("View");
+        }
     }
 }
