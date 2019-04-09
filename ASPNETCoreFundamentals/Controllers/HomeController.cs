@@ -195,5 +195,14 @@ namespace ASPNETCoreFundamentals.Controllers
         }
 
         public IActionResult TwoColumnLayout() => View();
+
+        public IActionResult SelectLists()
+        {
+            SelectListsViewModel vm = new SelectListsViewModel();
+            vm.SelectedValue1 = "cpp";
+            vm.SelectedValue2 = "js";
+            vm.MultiValues = new List<string> { "csharp", "cpp" };
+            return View(vm);
+        }
     }
 }
