@@ -193,5 +193,7 @@ namespace ASPNETCoreFundamentals.Controllers
             ViewBag.EFConfiguration = $"quote1: {_config.GetValue<string>("quote1")}, quote2: {_config.GetValue<string>("quote2")}, quote3: {_config.GetValue<string>("quote3")}";
             return View();
         }
+
+        public IActionResult TwoColumnLayout() => View();
     }
 }

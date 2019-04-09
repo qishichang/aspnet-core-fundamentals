@@ -1,0 +1,12 @@
+﻿
+@{
+    Layout = "_Layout";
+}
+
+<div class="main-content">
+    @RenderBody()
+</div>
+
+<div class="side-bar">
+    @RenderSection("Siderbar", required: true)
+</div>
