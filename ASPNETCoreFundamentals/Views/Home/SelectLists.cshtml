@@ -21,6 +21,13 @@
             <select class="form-control" asp-for="MultiValues" asp-items="Model.Items"></select>
         </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>List box with groups</label>
+            <select class="form-control" asp-for="SelectedValues" asp-items="Model.ItemsWithGroup"></select>
+        </div>
+    </div>
 </div>
 
 

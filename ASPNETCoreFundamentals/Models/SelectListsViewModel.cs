@@ -22,5 +22,23 @@ namespace ASPNETCoreFundamentals.Models
             new SelectListItem{Value= "js", Text="JavaScript"},
             new SelectListItem{Value= "ruby", Text="Ruby"},
         };
+
+        public IEnumerable<string> SelectedValues { get; set; }
+        public IEnumerable<SelectListItem> ItemsWithGroup { get; set; }
+
+        public SelectListsViewModel()
+        {
+            var dynamic = new SelectListGroup { Name = "Dynamic" };
+            var stat = new SelectListGroup { Name = "Static" };
+            ItemsWithGroup = new List<SelectListItem>
+            {
+                new SelectListItem{Value= "csharp", Text="C#", Group = stat},
+                new SelectListItem{Value= "python", Text= "Python", Group = dynamic},
+                new SelectListItem{Value= "cpp", Text="C++", Group = stat},
+                new SelectListItem{Value= "java", Text="Java"},
+                new SelectListItem{Value= "js", Text="JavaScript", Group = dynamic},
+                new SelectListItem{Value= "ruby", Text="Ruby"},
+            };
+        }
     }
 }

@@ -202,6 +202,8 @@ namespace ASPNETCoreFundamentals.Controllers
             vm.SelectedValue1 = "cpp";
             vm.SelectedValue2 = "js";
             vm.MultiValues = new List<string> { "csharp", "cpp" };
+            vm.SelectedValues = new List<string> { "csharp", "js" };
+
             return View(vm);
         }
     }
