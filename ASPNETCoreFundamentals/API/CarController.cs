@@ -17,8 +17,8 @@ namespace ASPNETCoreFundamentals.API
             return Ok("The car is starting.");
         }
 
-        [Route("car/speed/{speed}")]
-        [Route("set-speed/{speed}")]
+        [Route("car/speed/{speed:int=20}")]
+        [Route("set-speed/{speed:int=20}", Name = "set_speed")]
         public IActionResult SetCarSpeed(int speed)
         {
             return Ok($"The speed of the car is {speed}.");
