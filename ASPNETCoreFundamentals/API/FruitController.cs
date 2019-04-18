@@ -19,5 +19,15 @@ namespace ASPNETCoreFundamentals.API
         {
             return _fruits;
         }
+
+        public IActionResult View(int id)
+        {
+            if (id > 0 && id < _fruits.Count)
+            {
+                return Ok(_fruits[id]);
+            }
+
+            return NotFound();
+        }
     }
 }
