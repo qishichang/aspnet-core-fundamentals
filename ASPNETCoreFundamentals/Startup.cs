@@ -254,7 +254,7 @@ namespace ASPNETCoreFundamentals
             //    myOptions.Option1 = "ConfigureAll replacement value";
             //});
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddXmlSerializerFormatters();
+            services.AddMvc(options => options.RespectBrowserAcceptHeader = true).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddXmlSerializerFormatters();
 
             //services.AddScoped<IMyDependency, MyDependency>();
             //services.AddTransient<IOperationTransient, Operation>();
