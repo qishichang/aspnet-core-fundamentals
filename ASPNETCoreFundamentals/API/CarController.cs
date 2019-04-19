@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ASPNETCoreFundamentals.API
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]", Name = "[controller]_[action]")]
     public class CarController : Controller
     {
         [Route("[action]")]
