@@ -271,6 +271,8 @@ namespace ASPNETCoreFundamentals
             services.AddScoped<IMessageSender, SmsSender>();
             services.AddScoped<IMessageSender, FacebookSender>();
 
+            services.AddScoped<SingleMessageSender>();
+
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<DefaultModule>();

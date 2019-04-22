@@ -11,11 +11,13 @@ namespace ASPNETCoreFundamentals.Controllers
     {
         private readonly IEmailSender _emailSender;
         private readonly IEnumerable<IMessageSender> _messageSenders;
+        private readonly SingleMessageSender _singleMessageSender;
 
-        public UserController(IEmailSender emailSender, IEnumerable<IMessageSender> messageSenders)
+        public UserController(IEmailSender emailSender, IEnumerable<IMessageSender> messageSenders, SingleMessageSender singleMessageSender)
         {
             _emailSender = emailSender;
             _messageSenders = messageSenders;
+            _singleMessageSender = singleMessageSender;
         }
         public IActionResult Index()
         {
@@ -30,6 +32,8 @@ namespace ASPNETCoreFundamentals.Controllers
             {
                 messageSender.SendMessage(username);
             }
+
+            _singleMessageSender.SendMessage(username);
 
             return Content($"Hi {username}, thanks for signing up!");
         }
