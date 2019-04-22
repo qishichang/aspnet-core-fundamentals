@@ -7,6 +7,7 @@ using ASPNETCoreFundamentals.Data;
 using ASPNETCoreFundamentals.Middlewares;
 using ASPNETCoreFundamentals.Modules;
 using ASPNETCoreFundamentals.Options;
+using ASPNETCoreFundamentals.Services;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
@@ -263,6 +264,12 @@ namespace ASPNETCoreFundamentals
             //services.AddSingleton<IOperationSingletonInstance>(new Operation(Guid.Empty));
 
             services.AddTransient<OperationService, OperationService>();
+
+            services.AddScoped<IEmailSender, EmailSender>();
+            services.AddSingleton<NetworkClient>();
+            services.AddScoped<MessageFactory>();
+            services.AddSingleton(provider => new EmailServerSettings(host: "smtp.server.com", port: 25));
+            
 
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
