@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -269,7 +270,7 @@ namespace ASPNETCoreFundamentals
 
             services.AddScoped<IMessageSender, EmailSender>();
             services.AddScoped<IMessageSender, SmsSender>();
-            services.AddScoped<IMessageSender, FacebookSender>();
+            services.TryAddScoped<IMessageSender, FacebookSender>();
 
             services.AddScoped<SingleMessageSender>();
 
