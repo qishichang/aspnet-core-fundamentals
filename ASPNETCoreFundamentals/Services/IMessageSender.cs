@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace ASPNETCoreFundamentals.Services
 {
-    public interface IEmailSender : IMessageSender
+    public interface IMessageSender
     {
-        void SendEmail(string username);
+        void SendMessage(string message);
     }
 }

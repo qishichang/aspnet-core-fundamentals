@@ -21,5 +21,10 @@ namespace ASPNETCoreFundamentals.Services
             _client.SendEmail(email);
             Console.WriteLine($"Email sent to {username}!");
         }
+
+        public void SendMessage(string message)
+        {
+            this.SendEmail(message);
+        }
     }
 }
