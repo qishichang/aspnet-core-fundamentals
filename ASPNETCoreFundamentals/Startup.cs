@@ -265,11 +265,7 @@ namespace ASPNETCoreFundamentals
 
             services.AddTransient<OperationService, OperationService>();
 
-            services.AddScoped<IEmailSender, EmailSender>();
-            services.AddSingleton<NetworkClient>();
-            services.AddScoped<MessageFactory>();
-            services.AddSingleton(provider => new EmailServerSettings(host: "smtp.server.com", port: 25));
-            
+            services.AddEmailSender();
 
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
