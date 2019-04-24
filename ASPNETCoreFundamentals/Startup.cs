@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Data;
+using ASPNETCoreFundamentals.Helpers;
 using ASPNETCoreFundamentals.Middlewares;
 using ASPNETCoreFundamentals.Modules;
 using ASPNETCoreFundamentals.Options;
@@ -273,6 +274,8 @@ namespace ASPNETCoreFundamentals
             services.TryAddScoped<IMessageSender, FacebookSender>();
 
             services.AddScoped<SingleMessageSender>();
+
+            services.AddSingleton<HtmlGenerator>();
 
             // Add Autofac
             var containerBuilder = new ContainerBuilder();

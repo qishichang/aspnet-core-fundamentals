@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject ASPNETCoreFundamentals.Helpers.HtmlGenerator helper
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -52,6 +54,7 @@
         <hr />
         <footer>
             <p>&copy; @(DateTime.Now.Year + 1) - ASPNETCoreFundamentals</p>
+            @Html.Raw(helper.Copyright())
         </footer>
     </div>
 
