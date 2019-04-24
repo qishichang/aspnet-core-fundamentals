@@ -277,6 +277,9 @@ namespace ASPNETCoreFundamentals
 
             services.AddSingleton<HtmlGenerator>();
 
+            services.AddScoped<DatabaseContext>();
+            services.AddSingleton<Repository>();
+
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<DefaultModule>();

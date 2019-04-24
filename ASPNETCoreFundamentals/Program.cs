@@ -86,7 +86,11 @@ namespace ASPNETCoreFundamentals
                        config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
                        config.AddCommandLine(args, _switchMappings);
                    })
-                   .UseStartup(assemblyName);
+                   .UseStartup(assemblyName)
+                   .UseDefaultServiceProvider(options =>
+                   {
+                       options.ValidateScopes = true;
+                   });
         }
     }
 }
