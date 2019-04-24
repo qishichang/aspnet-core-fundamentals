@@ -9,13 +9,11 @@ namespace ASPNETCoreFundamentals.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IEmailSender _emailSender;
         private readonly IEnumerable<IMessageSender> _messageSenders;
         private readonly SingleMessageSender _singleMessageSender;
 
-        public UserController(IEmailSender emailSender, IEnumerable<IMessageSender> messageSenders, SingleMessageSender singleMessageSender)
+        public UserController(IEnumerable<IMessageSender> messageSenders, SingleMessageSender singleMessageSender)
         {
-            _emailSender = emailSender;
             _messageSenders = messageSenders;
             _singleMessageSender = singleMessageSender;
         }
@@ -24,9 +22,9 @@ namespace ASPNETCoreFundamentals.Controllers
             return View();
         }
 
-        public IActionResult RegisterUser(string username)
+        public IActionResult RegisterUser([FromServices] IEmailSender emailSender, string username)
         {
-            _emailSender.SendEmail(username);
+            emailSender.SendEmail(username);
 
             foreach (var messageSender in _messageSenders)
             {
