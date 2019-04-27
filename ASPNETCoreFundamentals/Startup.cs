@@ -209,6 +209,10 @@ namespace ASPNETCoreFundamentals
             services.AddDbContext<TodoContext>(options =>
                 options.UseInMemoryDatabase("db"));
 
+            var connString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connString));
+
 
             services.Configure<CookiePolicyOptions>(options =>
             {
