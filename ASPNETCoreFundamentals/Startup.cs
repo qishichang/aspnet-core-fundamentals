@@ -284,6 +284,8 @@ namespace ASPNETCoreFundamentals
             services.AddScoped<DatabaseContext>();
             services.AddSingleton<Repository>();
 
+            services.AddScoped<RecipeService>();
+
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<DefaultModule>();
