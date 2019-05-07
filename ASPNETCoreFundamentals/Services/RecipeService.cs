@@ -41,5 +41,18 @@ namespace ASPNETCoreFundamentals.Services
 
             return recipe.RecipeId;
         }
+
+        public ICollection<RecipeSummaryViewModel> GetRecipes()
+        {
+            return _context.Recipes
+                    .Where(r => !r.IsDeleted)
+                    .Select(r => new RecipeSummaryViewModel
+                    {
+                        Id = r.RecipeId,
+                        Name = r.Name,
+                        TimeToCook = $"{r.TimeToCook.TotalMinutes}mins"
+                    })
+                    .ToList();
+        }
     }
 }
