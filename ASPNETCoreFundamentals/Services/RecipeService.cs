@@ -54,5 +54,24 @@ namespace ASPNETCoreFundamentals.Services
                     })
                     .ToList();
         }
+
+        public RecipeDetailViewModel GetRecipeDetail(int id)
+        {
+            return _context.Recipes
+                    .Where(r => r.RecipeId == id)
+                    .Select(r => new RecipeDetailViewModel
+                    {
+                        Id = r.RecipeId,
+                        Name = r.Name,
+                        Method = r.Method,
+                        Ingredients = r.Ingredients
+                            .Select(item => new RecipeDetailViewModel.Item
+                            {
+                                Name = item.Name,
+                                Quantity = $"{item.Quantity} {item.Unit}"
+                            })
+                    })
+                    .SingleOrDefault();
+        }
     }
 }
