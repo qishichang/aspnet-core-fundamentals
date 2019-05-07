@@ -73,5 +73,38 @@ namespace ASPNETCoreFundamentals.Services
                     })
                     .SingleOrDefault();
         }
+
+        public void UpdateRecipe(UpdateRecipeCommand cmd)
+        {
+            var recipe = _context.Recipes.Find(cmd.Id);
+            if (recipe == null)
+            {
+                throw new Exception("Unable to find the recipe");
+            }
+            UpdateRecipe(recipe, cmd);
+            _context.SaveChanges();
+        }
+
+        public void DeleteRecipe(int recipeId)
+        {
+            var recipe = _context.Recipes.Find(recipeId);
+            if (recipe == null)
+            {
+                throw new Exception("Unable to find the recipe");
+            }
+            recipe.IsDeleted = true;
+            _context.SaveChanges();
+        }
+
+        private void UpdateRecipe(Recipe recipe, UpdateRecipeCommand cmd)
+        {
+            recipe.Name = cmd.Name;
+            recipe.TimeToCook = new TimeSpan(cmd.TimeToCookHrs, cmd.TimeToCookMins, 0);
+            recipe.Method = cmd.Method;
+            recipe.IsVegetarian = cmd.IsVegetarian;
+            recipe.IsVegan = cmd.IsVegan;
+        }
+
+
     }
 }
