@@ -13,7 +13,6 @@ using ASPNETCoreFundamentals.Filters;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
-    [LogResourceFilter]
     [AddHeaderWithFactory]
     public class HomeController : Controller
     {

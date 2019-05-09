@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Data;
+using ASPNETCoreFundamentals.Filters;
 using ASPNETCoreFundamentals.Helpers;
 using ASPNETCoreFundamentals.Middlewares;
 using ASPNETCoreFundamentals.Modules;
@@ -261,7 +262,11 @@ namespace ASPNETCoreFundamentals
             //    myOptions.Option1 = "ConfigureAll replacement value";
             //});
 
-            services.AddMvc(options => options.RespectBrowserAcceptHeader = true).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddXmlSerializerFormatters();
+            services.AddMvc(options => 
+            {
+                options.RespectBrowserAcceptHeader = true;
+                options.Filters.Add<LogResourceFilter>();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddXmlSerializerFormatters();
 
             //services.AddScoped<IMyDependency, MyDependency>();
             //services.AddTransient<IOperationTransient, Operation>();
