@@ -62,6 +62,7 @@ namespace ASPNETCoreFundamentals.Controllers
         public IOperationSingleton SingletonOperation { get; }
         public IOperationSingletonInstance InstanceOperation { get; }
 
+        [LogResourceFilter]
         public async Task<IActionResult> Index()
         {
             await _myDependency.WriteMessage("HomeController.Index created this message.");
