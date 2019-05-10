@@ -42,6 +42,14 @@ namespace ASPNETCoreFundamentals.Services
             return recipe.RecipeId;
         }
 
+        public bool DoesRecipeExist(int id)
+        {
+            return _context.Recipes
+                    .Where(r => !r.IsDeleted)
+                    .Where(r => r.RecipeId == id)
+                    .Any();
+        }
+
         public ICollection<RecipeSummaryViewModel> GetRecipes()
         {
             return _context.Recipes
@@ -64,6 +72,7 @@ namespace ASPNETCoreFundamentals.Services
                         Id = r.RecipeId,
                         Name = r.Name,
                         Method = r.Method,
+                        LastModified = r.LastModified,
                         Ingredients = r.Ingredients
                             .Select(item => new RecipeDetailViewModel.Item
                             {
@@ -103,6 +112,7 @@ namespace ASPNETCoreFundamentals.Services
             recipe.Method = cmd.Method;
             recipe.IsVegetarian = cmd.IsVegetarian;
             recipe.IsVegan = cmd.IsVegan;
+            recipe.LastModified = DateTimeOffset.UtcNow;
         }
 
 
