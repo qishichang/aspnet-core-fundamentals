@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNETCoreFundamentals.Filters;
 using ASPNETCoreFundamentals.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace ASPNETCoreFundamentals.API
 {
     [Route("api/recipe")]
     [ApiController]
+    [FeatureEnabled(IsEnabled = true)]
     public class RecipeApiController : ControllerBase
     {
         private const bool IsEnabled = true;
@@ -23,11 +25,6 @@ namespace ASPNETCoreFundamentals.API
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            if (!IsEnabled)
-            {
-                return BadRequest();
-            }
-
             try
             {
                 if (!_service.DoesRecipeExist(id))
@@ -48,11 +45,6 @@ namespace ASPNETCoreFundamentals.API
         [HttpPost("{id}")]
         public IActionResult Edit(int id, UpdateRecipeCommand command)
         {
-            if (!IsEnabled)
-            {
-                return BadRequest();
-            }
-
             try
             {
                 if (!ModelState.IsValid)
