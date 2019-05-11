@@ -12,6 +12,7 @@ namespace ASPNETCoreFundamentals.API
     [Route("api/recipe")]
     [ApiController]
     [FeatureEnabled(IsEnabled = true)]
+    [ValidateModel]
     public class RecipeApiController : ControllerBase
     {
         private const bool IsEnabled = true;
@@ -47,11 +48,6 @@ namespace ASPNETCoreFundamentals.API
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
                 if (!_service.DoesRecipeExist(id))
                 {
                     return NotFound();
