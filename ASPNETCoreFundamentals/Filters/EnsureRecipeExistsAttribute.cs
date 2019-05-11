@@ -8,16 +8,32 @@ using System.Threading.Tasks;
 
 namespace ASPNETCoreFundamentals.Filters
 {
-    public class EnsureRecipeExistsAttribute : ActionFilterAttribute
+    public class EnsureRecipeExistsAttribute : TypeFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext context)
+        public EnsureRecipeExistsAttribute() :base(typeof(EnsureRecipeExistsFilter))
         {
-            var service = (RecipeService)context.HttpContext.RequestServices.GetService(typeof(RecipeService));
+        }
+    }
+
+    public class EnsureRecipeExistsFilter : IActionFilter
+    {
+        private readonly RecipeService _service;
+
+        public EnsureRecipeExistsFilter(RecipeService service)
+        {
+            _service = service;
+        }
+        public void OnActionExecuting(ActionExecutingContext context)
+        {
             var recipeId = (int)context.ActionArguments["id"];
-            if (!service.DoesRecipeExist(recipeId))
+            if (!_service.DoesRecipeExist(recipeId))
             {
                 context.Result = new NotFoundResult();
             }
+        }
+
+        public void OnActionExecuted(ActionExecutedContext context)
+        {
         }
     }
 }
