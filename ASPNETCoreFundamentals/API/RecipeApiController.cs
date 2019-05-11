@@ -26,10 +26,10 @@ namespace ASPNETCoreFundamentals.API
 
         [HttpGet("{id}")]
         [EnsureRecipeExists]
+        [AddLastModifiedHeader]
         public IActionResult Get(int id)
         {
             var detail = _service.GetRecipeDetail(id);
-            Response.GetTypedHeaders().LastModified = detail.LastModified;
             return Ok(detail);
 
         }
