@@ -13,6 +13,7 @@ namespace ASPNETCoreFundamentals.API
     [ApiController]
     [FeatureEnabled(IsEnabled = true)]
     [ValidateModel]
+    [EnsureRecipeExists]
     public class RecipeApiController : ControllerBase
     {
         private const bool IsEnabled = true;
@@ -28,11 +29,6 @@ namespace ASPNETCoreFundamentals.API
         {
             try
             {
-                if (!_service.DoesRecipeExist(id))
-                {
-                    return NotFound();
-                }
-
                 var detail = _service.GetRecipeDetail(id);
                 Response.GetTypedHeaders().LastModified = detail.LastModified;
                 return Ok(detail);
@@ -48,11 +44,6 @@ namespace ASPNETCoreFundamentals.API
         {
             try
             {
-                if (!_service.DoesRecipeExist(id))
-                {
-                    return NotFound();
-                }
-
                 _service.UpdateRecipe(command);
                 return Ok();
             }
