@@ -25,5 +25,17 @@ namespace ASPNETCoreFundamentals.Controllers
             _log.LogInformation("Loaded {RecipeCount} recipes", models.Count);
             return View(models);
         }
+
+        public IActionResult View(int id)
+        {
+            _log.LogInformation("Loading recipe with id {RecipeId}", id);
+            var model = _service.GetRecipeDetail(id);
+            if(model == null)
+            {
+                _log.LogWarning("Could not find recipe with id {RecipeId}", id);
+                return NotFound();
+            }
+            return View(model);
+        }
     }
 }
