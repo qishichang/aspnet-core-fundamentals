@@ -1,0 +1,23 @@
+﻿@model IEnumerable<RecipeSummaryViewModel>
+
+<h2>Recipe List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Time To Cook</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>
+                    @r.Name
+                </td>
+                <td>@r.TimeToCook</td>
+            </tr>
+        }
+    </tbody>
+</table>
