@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace ASPNETCoreFundamentals
 {
@@ -44,24 +45,40 @@ namespace ASPNETCoreFundamentals
 
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
-
-            using (var serviceScope = host.Services.CreateScope())
+            Log.Logger = new LoggerConfiguration()
+                            .WriteTo.Console()
+                            .CreateLogger();
+            try
             {
-                var services = serviceScope.ServiceProvider;
-                try
-                {
-                    var serviceContext = services.GetRequiredService<IMyDependency>();
-                    serviceContext.WriteMessage("Program.Main created this message.").Wait();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred.");
-                }
-            }
+                var host = CreateWebHostBuilder(args).Build();
 
-            host.Run();
+                using (var serviceScope = host.Services.CreateScope())
+                {
+                    var services = serviceScope.ServiceProvider;
+                    try
+                    {
+                        var serviceContext = services.GetRequiredService<IMyDependency>();
+                        serviceContext.WriteMessage("Program.Main created this message.").Wait();
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error occurred.");
+                    }
+                }
+
+                host.Run();
+
+            }
+            catch (Exception exx)
+            {
+                Log.Fatal(exx, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+            
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
@@ -86,6 +103,7 @@ namespace ASPNETCoreFundamentals
                        config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
                        config.AddCommandLine(args, _switchMappings);
                    })
+                   .UseSerilog()
                    .UseStartup(assemblyName)
                    .UseDefaultServiceProvider(options =>
                    {
