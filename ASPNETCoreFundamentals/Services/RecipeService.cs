@@ -1,5 +1,6 @@
 ﻿using ASPNETCoreFundamentals.Data;
 using ASPNETCoreFundamentals.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace ASPNETCoreFundamentals.Services
     public class RecipeService
     {
         private readonly AppDbContext _context;
+        private readonly ILogger _log;
 
-        public RecipeService(AppDbContext context)
+        public RecipeService(AppDbContext context, ILoggerFactory factory)
         {
             _context = context;
+            _log = factory.CreateLogger("RecipeApp.RecipeService");
         }
 
         public int CreateRecipe(CreateRecipeCommand cmd)
