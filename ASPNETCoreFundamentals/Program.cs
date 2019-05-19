@@ -103,7 +103,7 @@ namespace ASPNETCoreFundamentals
                        config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
                        config.AddCommandLine(args, _switchMappings);
                    })
-                   .UseSerilog()
+                   //.UseSerilog()
                    .UseStartup(assemblyName)
                    .UseDefaultServiceProvider(options =>
                    {
