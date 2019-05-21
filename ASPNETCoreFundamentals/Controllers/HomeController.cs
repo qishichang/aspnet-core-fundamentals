@@ -10,6 +10,7 @@ using ASPNETCoreFundamentals.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using ASPNETCoreFundamentals.Filters;
+using Microsoft.Extensions.Logging;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
@@ -23,9 +24,11 @@ namespace ASPNETCoreFundamentals.Controllers
         private readonly MyOptions _snapshotOptions;
         private readonly MyOptions _named_options_1;
         private readonly MyOptions _named_options_2;
+        private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
 
         public HomeController(
+            ILogger<HomeController> logger,
             IConfiguration config,
             IOptionsMonitor<MyOptions> optionAccessor,
             IOptionsMonitor<MyOptionsWithDelegateConfig> optionsAccessorWithDelegateConfig,
@@ -39,6 +42,7 @@ namespace ASPNETCoreFundamentals.Controllers
             IOperationSingleton singletonOperation,
             IOperationSingletonInstance instanceOperation)
         {
+            _logger = logger;
             _config = config;
 
             _options = optionAccessor.CurrentValue;
@@ -65,6 +69,17 @@ namespace ASPNETCoreFundamentals.Controllers
         public async Task<IActionResult> Index()
         {
             await _myDependency.WriteMessage("HomeController.Index created this message.");
+
+            _logger.LogInformation("No, I don't have scope");
+
+            using (_logger.BeginScope("Scope value"))
+            using (_logger.BeginScope(new Dictionary<string, object> { { "CustomValue1", 12345 } }))
+            {
+                _logger.LogInformation("Yes, I have the scope");
+                _logger.LogInformation("Yes, I still have the scope");
+            }
+
+            _logger.LogInformation("No, I lost it again");
             return View();
         }
 
