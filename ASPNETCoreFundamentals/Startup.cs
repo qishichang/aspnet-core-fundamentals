@@ -331,13 +331,17 @@ namespace ASPNETCoreFundamentals
 
             var value = config["quote1"];
 
-            app.Map("/ping", branch =>
+            app.Use(async (context, next) =>
             {
-                branch.Run(async (context) =>
+                if (context.Request.Path.StartsWithSegments("/ping"))
                 {
                     context.Response.ContentType = "text/plain";
                     await context.Response.WriteAsync("pong");
-                });
+                }
+                else
+                {
+                    await next();
+                }
             });
 
             app.UseMvc(routes =>
