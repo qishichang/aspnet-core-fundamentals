@@ -331,6 +331,12 @@ namespace ASPNETCoreFundamentals
 
             var value = config["quote1"];
 
+            app.Run(async (context) =>
+            {
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync(DateTime.UtcNow.ToString());
+            });
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
