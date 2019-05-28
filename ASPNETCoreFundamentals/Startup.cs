@@ -262,7 +262,7 @@ namespace ASPNETCoreFundamentals
             //    myOptions.Option1 = "ConfigureAll replacement value";
             //});
 
-            services.AddMvc(options => 
+            services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.Filters.Add<LogResourceFilter>();
@@ -331,10 +331,13 @@ namespace ASPNETCoreFundamentals
 
             var value = config["quote1"];
 
-            app.Run(async (context) =>
+            app.Map("/ping", branch =>
             {
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync(DateTime.UtcNow.ToString());
+                branch.Run(async (context) =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    await context.Response.WriteAsync("pong");
+                });
             });
 
             app.UseMvc(routes =>
