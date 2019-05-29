@@ -331,18 +331,7 @@ namespace ASPNETCoreFundamentals
 
             var value = config["quote1"];
 
-            app.Use(async (context, next) =>
-            {
-                if (context.Request.Path.StartsWithSegments("/ping"))
-                {
-                    context.Response.ContentType = "text/plain";
-                    await context.Response.WriteAsync("pong");
-                }
-                else
-                {
-                    await next();
-                }
-            });
+            app.UseHealthCheck();
 
             app.UseMvc(routes =>
             {
