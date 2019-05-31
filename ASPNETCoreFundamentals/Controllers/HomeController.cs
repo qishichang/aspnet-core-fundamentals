@@ -206,6 +206,10 @@ namespace ASPNETCoreFundamentals.Controllers
             ViewBag.JsonArrayConfig = $"Json Array: Key-{jsonArrayExample.Key}, Subsection: {string.Join(',', jsonArrayExample.Subsection)}";
 
             ViewBag.EFConfiguration = $"quote1: {_config.GetValue<string>("quote1")}, quote2: {_config.GetValue<string>("quote2")}, quote3: {_config.GetValue<string>("quote3")}";
+
+            var configSettings = $"setting1: {_config.GetValue<string>("setting1")}, setting2: {_config.GetValue<string>("setting2")}";
+            ViewBag.ConfigSettings = configSettings;
+
             return View();
         }
 

@@ -102,6 +102,11 @@ namespace ASPNETCoreFundamentals
                        config.AddKeyPerFile(directoryPath: path, optional: true);
                        config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
                        config.AddCommandLine(args, _switchMappings);
+
+                       config.AddXmlFile("baseconfig.xml");
+                       IConfiguration partialConfig = config.Build();
+                       string filename = partialConfig["SettingsFile"];
+                       config.AddJsonFile(filename, optional: true, reloadOnChange: true);
                    })
                    .ConfigureLogging(builder => builder.AddSeq())
                    //.UseSerilog()
