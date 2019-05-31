@@ -262,6 +262,10 @@ namespace ASPNETCoreFundamentals
             //    myOptions.Option1 = "ConfigureAll replacement value";
             //});
 
+            services.Configure<CurrencyOptions>(Configuration.GetSection("Currencies"));
+            services.AddSingleton<IConfigureOptions<CurrencyOptions>, ConfigureCurrencyOptions>();
+            services.AddSingleton<ICurrencyProvider, CurrencyProvider>();
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;

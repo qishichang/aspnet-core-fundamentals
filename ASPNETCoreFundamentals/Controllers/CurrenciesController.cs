@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNETCoreFundamentals.Options;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace ASPNETCoreFundamentals.Controllers
 {
     public class CurrenciesController : Controller
     {
+        private readonly CurrencyOptions _currencies;
+
+        public CurrenciesController(IOptions<CurrencyOptions> currencies)
+        {
+            _currencies = currencies.Value;
+        }
         public IActionResult Index()
         {
             var url = Url.Action("View", "Currencies", new { code = "USD" });
@@ -38,6 +46,11 @@ namespace ASPNETCoreFundamentals.Controllers
         public IActionResult RedirectingToAnActionInTheSameController()
         {
             return RedirectToAction("View");
+        }
+
+        public IActionResult List()
+        {
+            return Content($"Currencies: { string.Join(',', _currencies.Currencies.ToArray())}");
         }
     }
 }
