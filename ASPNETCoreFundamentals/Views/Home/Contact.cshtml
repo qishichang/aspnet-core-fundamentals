@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Contact";
+    var showContent = true;
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
@@ -15,3 +16,7 @@
     <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+<p if="showContent">
+    The content to show
+</p>
