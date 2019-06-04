@@ -11,11 +11,11 @@ namespace ASPNETCoreFundamentals.Models
     {
         [Required]
         [StringLength(3, MinimumLength = 3)]
-        [CurrencyCode("GBP", "USD", "CAD", "EUR")]
+        [CurrencyCode]
         public string CurrencyFrom { get; set; }
 
         [Required]
-        [CurrencyCode("GBP", "USD", "CAD", "EUR")]
+        [CurrencyCode]
         [StringLength(3, MinimumLength = 3)]
         public string CurrencyTo { get; set; }
 
