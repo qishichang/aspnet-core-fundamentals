@@ -9,19 +9,18 @@ namespace ASPNETCoreFundamentals.Test.Helpers
 {
     public class CurrencyConverterTests
     {
-        [Fact]
-        public void ConvertToGbp_ConvertsCorrectly()
+        [Theory]
+        [InlineData(0, 3, 0)]
+        [InlineData(3, 1.5, 2)]
+        [InlineData(3.75, 2.5, 1.5)]
+        public void ConvertToGbp_ConvertsCorrectly(decimal value, decimal rate, decimal expected)
         {
             // Arrange
             var converter = new CurrencyConverter();
-            decimal value = 3;
-            decimal rate = 1.5m;
-            int dp = 4;
-
-            decimal expected = 2;
+            int dps = 4;
 
             // Act
-            var actual = converter.ConvertToGbp(value, rate, dp);
+            var actual = converter.ConvertToGbp(value, rate, dps);
 
             // Assert
             actual.ShouldBe(expected);
