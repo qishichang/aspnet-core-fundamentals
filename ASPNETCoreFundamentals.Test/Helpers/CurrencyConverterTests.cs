@@ -25,5 +25,19 @@ namespace ASPNETCoreFundamentals.Test.Helpers
             // Assert
             actual.ShouldBe(expected);
         }
+
+        [Fact]
+        public void ConvertToGbp_ThrowsExceptionIfRateIsZero()
+        {
+            // Arrange 
+            var converter = new CurrencyConverter();
+            const decimal value = 1;
+            const decimal rate = 0;
+            const int dp = 2;
+
+            // Act
+            // Assert
+            Should.Throw<ArgumentException>(() => converter.ConvertToGbp(value, rate, dp)).Message.ShouldStartWith("Exchange rate must be greater than zero");
+        }
     }
 }
