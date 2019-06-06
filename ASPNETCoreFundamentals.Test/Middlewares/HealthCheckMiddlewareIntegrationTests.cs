@@ -14,25 +14,23 @@ using Xunit;
 
 namespace ASPNETCoreFundamentals.Test.Middlewares
 {
-    public class HealthCheckMiddlewareIntegrationTests
+    public class HealthCheckMiddlewareIntegrationTests : IClassFixture<TestFixture>
     {
+        private readonly HttpClient _client;
+
+        public HealthCheckMiddlewareIntegrationTests(TestFixture fixture)
+        {
+            _client = fixture.Client;
+        }
+
         [Fact]
         public async Task StatusMiddlewareReturnsPong()
         {
-            var hostBuilder = new WebHostBuilder()
-                .UseStartup<Startup>();
+            var response = await _client.GetAsync("/ping");
+            var content = await response.Content.ReadAsStringAsync();
 
-            using(var server = new TestServer(hostBuilder))
-            {
-                HttpClient client = server.CreateClient();
-                var response = await client.GetAsync("/ping");
-
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-
-                // Assert
-                content.ShouldBe("pong");
-            }
+            // Assert
+            content.ShouldBe("pong");
         }
     }
 }

@@ -12,29 +12,21 @@ using Xunit;
 
 namespace ASPNETCoreFundamentals.Test.Controllers
 {
-    public class HomeControllerIntegrationTests
+    public class HomeControllerIntegrationTests : IClassFixture<TestFixture>
     {
+        private readonly HttpClient _client;
+
+        public HomeControllerIntegrationTests(TestFixture fixture)
+        {
+            _client = fixture.Client;
+        }
+
         [Fact]
         public async Task IndexReturnsHtml()
         {
-            var projectRootPath = Path.Combine(
-                Directory.GetCurrentDirectory(),
-                "..", "..", "..", "..", "ASPNETCoreFundamentals");
-
-            var builder = WebHost.CreateDefaultBuilder()
-                .UseStartup<Startup>()
-                .UseContentRoot(projectRootPath);
-
-            using (var server = new TestServer(builder))
-            {
-                HttpClient client = server.CreateClient();
-
-                var response = await client.GetAsync("/");
-
-                response.EnsureSuccessStatusCode();
-                var content = await response.Content.ReadAsStringAsync();
-                content.ShouldContain("<h1>Home page</h1>");
-            }
+            var response = await _client.GetAsync("/");
+            var content = await response.Content.ReadAsStringAsync();
+            content.ShouldContain("<h1>Home page</h1>");
         }
     }
 }
