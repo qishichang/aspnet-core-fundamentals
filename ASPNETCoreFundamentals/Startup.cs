@@ -294,6 +294,7 @@ namespace ASPNETCoreFundamentals
             services.AddSingleton<Repository>();
 
             services.AddScoped<RecipeService>();
+            services.AddSingleton<CurrencyConverter>();
 
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
