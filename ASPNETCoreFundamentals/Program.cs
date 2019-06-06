@@ -88,7 +88,7 @@ namespace ASPNETCoreFundamentals
             return WebHost.CreateDefaultBuilder()
                    .ConfigureAppConfiguration((hostingContext, config) =>
                    {
-                       config.SetBasePath(Directory.GetCurrentDirectory());
+                       //config.SetBasePath(Directory.GetCurrentDirectory());
                        config.AddInMemoryCollection(_dict);
                        config.AddInMemoryCollection(_arrayDict);
                        config.AddIniFile("config.ini", optional: true, reloadOnChange: true);

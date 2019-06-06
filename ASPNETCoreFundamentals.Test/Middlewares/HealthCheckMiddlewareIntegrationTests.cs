@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Shouldly;
 using System;
@@ -14,13 +15,13 @@ using Xunit;
 
 namespace ASPNETCoreFundamentals.Test.Middlewares
 {
-    public class HealthCheckMiddlewareIntegrationTests : IClassFixture<TestFixture>
+    public class HealthCheckMiddlewareIntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public HealthCheckMiddlewareIntegrationTests(TestFixture fixture)
+        public HealthCheckMiddlewareIntegrationTests(WebApplicationFactory<Startup> factory)
         {
-            _client = fixture.Client;
+            _client = factory.CreateClient();
         }
 
         [Fact]
