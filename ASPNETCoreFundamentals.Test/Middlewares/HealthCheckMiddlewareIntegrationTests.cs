@@ -20,10 +20,7 @@ namespace ASPNETCoreFundamentals.Test.Middlewares
         public async Task StatusMiddlewareReturnsPong()
         {
             var hostBuilder = new WebHostBuilder()
-                .Configure(app =>
-                {
-                    app.UseMiddleware<HealthCheckMiddleware>();
-                });
+                .UseStartup<Startup>();
 
             using(var server = new TestServer(hostBuilder))
             {
