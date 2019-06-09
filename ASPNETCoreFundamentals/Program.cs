@@ -86,6 +86,7 @@ namespace ASPNETCoreFundamentals
 
             var assemblyName = typeof(Startup).GetTypeInfo().Assembly.FullName;
             return WebHost.CreateDefaultBuilder()
+                   .UseConfiguration(GetLaunchConfiguration())
                    .ConfigureAppConfiguration((hostingContext, config) =>
                    {
                        //config.SetBasePath(Directory.GetCurrentDirectory());
@@ -102,7 +103,6 @@ namespace ASPNETCoreFundamentals
                        config.AddKeyPerFile(directoryPath: path, optional: true);
                        config.AddEFConfiguration(options => options.UseInMemoryDatabase("InMemoryDb"));
                        config.AddCommandLine(args, _switchMappings);
-
                        config.AddXmlFile("baseconfig.xml");
                        IConfiguration partialConfig = config.Build();
                        string filename = partialConfig["SettingsFile"];
@@ -116,5 +116,11 @@ namespace ASPNETCoreFundamentals
                        options.ValidateScopes = true;
                    });
         }
+
+        public static IConfiguration GetLaunchConfiguration() =>
+            new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("hosting.json")
+                .Build();
     }
 }
