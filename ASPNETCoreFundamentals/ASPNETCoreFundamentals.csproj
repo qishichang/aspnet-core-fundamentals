@@ -49,4 +49,8 @@
     <ProjectReference Include="..\ASPNETCoreFundamentals.Core\ASPNETCoreFundamentals.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
 </Project>
