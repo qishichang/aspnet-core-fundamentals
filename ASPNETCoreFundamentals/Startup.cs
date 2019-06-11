@@ -7,6 +7,7 @@ using ASPNETCoreFundamentals.Data;
 using ASPNETCoreFundamentals.Filters;
 using ASPNETCoreFundamentals.Helpers;
 using ASPNETCoreFundamentals.Middlewares;
+using ASPNETCoreFundamentals.Models;
 using ASPNETCoreFundamentals.Modules;
 using ASPNETCoreFundamentals.Options;
 using ASPNETCoreFundamentals.Services;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
@@ -266,6 +268,12 @@ namespace ASPNETCoreFundamentals
             services.AddSingleton<IConfigureOptions<CurrencyOptions>, ConfigureCurrencyOptions>();
             services.AddSingleton<ICurrencyProvider, CurrencyProvider>();
 
+            services.AddDefaultIdentity<ApplicationUser>(options =>
+                {
+                    options.Password.RequiredLength = 10;
+                })
+                .AddEntityFrameworkStores<AppDbContext>();
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
@@ -337,6 +345,8 @@ namespace ASPNETCoreFundamentals
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMiddleware<CustomExceptionMiddleware>();
 
