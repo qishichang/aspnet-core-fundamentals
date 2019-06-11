@@ -274,6 +274,14 @@ namespace ASPNETCoreFundamentals
                 })
                 .AddEntityFrameworkStores<AppDbContext>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "CanEnterSecurity",
+                    policyBuilder => policyBuilder
+                        .RequireClaim("BoardingPassNumber"));
+            });
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
