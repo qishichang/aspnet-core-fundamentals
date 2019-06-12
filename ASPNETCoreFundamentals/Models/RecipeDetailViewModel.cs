@@ -11,7 +11,8 @@ namespace ASPNETCoreFundamentals.Models
         public string Name { get; set; }
         public string Method { get; set; }
         public IEnumerable<Item> Ingredients { get; set; }
-        public DateTimeOffset LastModified { get; internal set; }
+        public DateTimeOffset LastModified { get; set; }
+        public bool CanEditRecipe { get; set; }
 
         public class Item
         {

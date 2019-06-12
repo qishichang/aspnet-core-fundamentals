@@ -30,7 +30,7 @@ namespace ASPNETCoreFundamentals.Controllers
             return View(models);
         }
 
-        public IActionResult View(int id)
+        public async Task<IActionResult> View(int id)
         {
             _log.LogInformation("Loading recipe with id {RecipeId}", id);
             var model = _service.GetRecipeDetail(id);
@@ -39,9 +39,14 @@ namespace ASPNETCoreFundamentals.Controllers
                 _log.LogWarning("Could not find recipe with id {RecipeId}", id);
                 return NotFound();
             }
+
+            var recipe = _service.GetRecipe(id);
+            var authResult = await _authService.AuthorizeAsync(User, recipe, "CanManageRecipe");
+            model.CanEditRecipe = authResult.Succeeded;
             return View(model);
         }
 
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var recipe = _service.GetRecipe(id);
