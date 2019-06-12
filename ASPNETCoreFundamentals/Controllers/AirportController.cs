@@ -19,5 +19,11 @@ namespace ASPNETCoreFundamentals.Controllers
         {
             return View();
         }
+
+        [Authorize("CanAccessLounge")]
+        public IActionResult AirportLounge()
+        {
+            return View();
+        }
     }
 }

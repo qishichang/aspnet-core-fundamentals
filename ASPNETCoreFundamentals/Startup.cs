@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNETCoreFundamentals.Authorization;
 using ASPNETCoreFundamentals.Core;
 using ASPNETCoreFundamentals.Data;
 using ASPNETCoreFundamentals.Filters;
@@ -13,6 +14,7 @@ using ASPNETCoreFundamentals.Options;
 using ASPNETCoreFundamentals.Services;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -280,7 +282,19 @@ namespace ASPNETCoreFundamentals
                     "CanEnterSecurity",
                     policyBuilder => policyBuilder
                         .RequireClaim("BoardingPassNumber"));
+
+                options.AddPolicy(
+                    "CanAccessLounge",
+                    policyBuilder => policyBuilder.AddRequirements(
+                            new MinimumAgeRequirement(18),
+                            new AllowedInLoungeRequirement()
+                    ));
             });
+
+            services.AddSingleton<IAuthorizationHandler, FrequentFlyerHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsAirelineEmployeeHandler>();
+            services.AddSingleton<IAuthorizationHandler, BannedFromLoungeHandler>();
+            services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
             services.AddMvc(options =>
             {
