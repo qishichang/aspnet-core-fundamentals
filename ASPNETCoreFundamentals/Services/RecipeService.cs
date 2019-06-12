@@ -86,6 +86,12 @@ namespace ASPNETCoreFundamentals.Services
                     .SingleOrDefault();
         }
 
+        public Recipe GetRecipe(int id)
+        {
+            return _context.Recipes
+                    .Find(id);
+        }
+
         public void UpdateRecipe(UpdateRecipeCommand cmd)
         {
             var recipe = _context.Recipes.Find(cmd.Id);

@@ -289,12 +289,19 @@ namespace ASPNETCoreFundamentals
                             new MinimumAgeRequirement(18),
                             new AllowedInLoungeRequirement()
                     ));
+
+                options.AddPolicy(
+                    "CanManageRecipe",
+                    policyBuilder => policyBuilder.AddRequirements(
+                            new IsRecipeOwnerRequirement()
+                    ));
             });
 
             services.AddSingleton<IAuthorizationHandler, FrequentFlyerHandler>();
             services.AddSingleton<IAuthorizationHandler, IsAirelineEmployeeHandler>();
             services.AddSingleton<IAuthorizationHandler, BannedFromLoungeHandler>();
             services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+            services.AddScoped<IAuthorizationHandler, IsRecipeOwnderHandler>();
 
             services.AddMvc(options =>
             {
