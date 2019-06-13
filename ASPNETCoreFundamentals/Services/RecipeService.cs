@@ -128,8 +128,7 @@ namespace ASPNETCoreFundamentals.Services
         public IList<Recipe> FindRecipe(string search)
         {
             return _context.Recipes
-                    .FromSql("SELECT * FROM Recipes" +
-                             "WHERE Name = '" + search + "'")
+                    .FromSql("SELECT * FROM Recipes WHERE Name = '{0}'", search)
                     .ToList();
         }
     }
