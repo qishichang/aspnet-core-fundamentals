@@ -307,6 +307,7 @@ namespace ASPNETCoreFundamentals
             {
                 options.RespectBrowserAcceptHeader = true;
                 options.Filters.Add<LogResourceFilter>();
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddXmlSerializerFormatters();
 
             //services.AddScoped<IMyDependency, MyDependency>();
