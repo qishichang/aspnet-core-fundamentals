@@ -1,5 +1,6 @@
 ﻿using ASPNETCoreFundamentals.Data;
 using ASPNETCoreFundamentals.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -124,6 +125,12 @@ namespace ASPNETCoreFundamentals.Services
             recipe.LastModified = DateTimeOffset.UtcNow;
         }
 
-
+        public IList<Recipe> FindRecipe(string search)
+        {
+            return _context.Recipes
+                    .FromSql("SELECT * FROM Recipes" +
+                             "WHERE Name = '" + search + "'")
+                    .ToList();
+        }
     }
 }
