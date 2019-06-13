@@ -46,6 +46,20 @@ namespace ASPNETCoreFundamentals.Services
             return recipe.RecipeId;
         }
 
+        public ICollection<RecipeSummaryViewModel> GetRecipesForUser(string userId, int numberOfRecipes)
+        {
+            return _context.Recipes
+                    .Where(r => r.CreatedById == userId)
+                    .Where(r => !r.IsDeleted)
+                    .OrderBy(r => r.LastModified)
+                    .Take(numberOfRecipes)
+                    .Select(r => new RecipeSummaryViewModel
+                    {
+                        Id = r.RecipeId,
+                        Name = r.Name
+                    }).ToList();
+        }
+
         public bool DoesRecipeExist(int id)
         {
             return _context.Recipes
