@@ -303,6 +303,17 @@ namespace ASPNETCoreFundamentals
             services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
             services.AddScoped<IAuthorizationHandler, IsRecipeOwnderHandler>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowShoppingApp", policy =>
+                    policy.WithOrigins("http://shopping.com")
+                        .AllowAnyMethod());
+
+                options.AddPolicy("AllowAnyOrigin", policy =>
+                    policy.AllowAnyOrigin()
+                        .AllowAnyMethod());
+            });
+
             services.AddMvc(options =>
             {
                 options.RespectBrowserAcceptHeader = true;
@@ -383,6 +394,8 @@ namespace ASPNETCoreFundamentals
             var value = config["quote1"];
 
             app.UseHealthCheck();
+
+            app.UseCors("AllowShoppingApp");
 
             app.UseMvc(routes =>
             {
